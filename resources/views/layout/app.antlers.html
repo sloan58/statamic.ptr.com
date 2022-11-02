@@ -7,14 +7,92 @@
 </head>
 <body>
     {{ partial:layout.nav }}
-    {{ partial:layout.hero }}
-    {{ partial:layout.features }}
-    {{ partial:layout.about }}
-    {{ partial:layout.pricing }}
-    {{ partial:layout.faqs }}
-    {{ partial:layout.testimonials }}
-    {{ partial:layout.team }}
-    {{ partial:layout.contact }}
+    {{ partial:demo.hero }}
+    {{ partial:demo.features }}
+    {{ partial:demo.about }}
+    {{ partial:demo.pricing }}
+    {{ partial:demo.faqs }}
+    {{ partial:demo.testimonials }}
+    {{ partial:demo.team }}
+    {{ partial:demo.contact }}
     {{ partial:layout.footer }}
+
+    <!-- ====== Back To Top Start -->
+    <a
+        href="javascript:void(0)"
+        class="
+        hidden
+        items-center
+        justify-center
+        bg-primary
+        text-white
+        w-10
+        h-10
+        rounded-md
+        fixed
+        bottom-8
+        right-8
+        left-auto
+        z-[999]
+        hover:bg-dark
+        back-to-top
+        shadow-md
+        transition
+        duration-300
+        ease-in-out
+      "
+    >
+      <span
+          class="w-3 h-3 border-t border-l border-white rotate-45 mt-[6px]"
+      ></span>
+    </a>
+    <!-- ====== Back To Top End -->
+
+    <!-- ====== All Scripts -->
+
+    <script src="/js/theme.js"></script>
+    <script>
+        // ==== for menu scroll
+        const pageLink = document.querySelectorAll(".ud-menu-scroll");
+
+        pageLink.forEach((elem) => {
+            elem.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.querySelector(elem.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth",
+                    offsetTop: 1 - 60,
+                });
+            });
+        });
+
+        // section menu active
+        function onScroll(event) {
+            const sections = document.querySelectorAll(".ud-menu-scroll");
+            const scrollPos =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop;
+
+            for (let i = 0; i < sections.length; i++) {
+                const currLink = sections[i];
+                const val = currLink.getAttribute("href");
+                const refElement = document.querySelector(val);
+                const scrollTopMinus = scrollPos + 73;
+                if (
+                    refElement.offsetTop <= scrollTopMinus &&
+                    refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+                ) {
+                    document
+                        .querySelector(".ud-menu-scroll")
+                        .classList.remove("active");
+                    currLink.classList.add("active");
+                } else {
+                    currLink.classList.remove("active");
+                }
+            }
+        }
+
+        window.document.addEventListener("scroll", onScroll);
+    </script>
 </body>
 </html>
